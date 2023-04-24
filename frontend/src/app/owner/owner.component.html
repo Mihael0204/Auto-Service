@@ -1,0 +1,26 @@
+<div style="border: 1px solid black;padding:10px">
+  <h2>Add Owner</h2>
+  <input type="text" placeholder="Enter Name" [(ngModel)]="name" /><br />
+  <button (click)="addOwner()">Add Owner</button>
+</div>
+<div style="border: 1px solid black;padding:10px;margin-top:10px">
+  <h2>Owners:</h2>
+  <ul>
+    <li *ngFor="let owner of owners" style="margin-bottom:10px;padding-bottom:10px;border-bottom: solid 1px black;">
+      <div *ngIf="owner">
+        <form (ngSubmit)="updateOwner(owner)">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="owner.name" name="name" /><br />
+            <input type="hidden" [(ngModel)]="owner.ordersId" name="ordersId" />
+            <input type="hidden" [(ngModel)]="owner.carsId" name="carsId" /><br />
+            <button type="submit" (click)="getOrders(owner)">Show all orders</button>
+            <div *ngFor="let order of owner.orders">
+              {{order.id}}
+            </div>
+            <button type="submit">Update Owner</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

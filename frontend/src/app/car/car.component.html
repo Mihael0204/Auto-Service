@@ -1,0 +1,35 @@
+<div style="border: 1px solid black;padding:10px">
+  <h2>Add Car</h2>
+  <input type="text" placeholder="Enter Manufacture" [(ngModel)]="manufacture" /><br />
+  <input type="text" placeholder="Enter Model" [(ngModel)]="model" /><br />
+  <input type="text" placeholder="Enter Car Number" [(ngModel)]="number" /><br />
+  <input type="text" placeholder="Enter Year" [(ngModel)]="year" /><br />
+  <select [(ngModel)]="owner_id" name="owner">
+    <option [ngValue]="null" disabled selected = selected>Select Owner</option>
+    <option *ngFor="let owner of owners" [ngValue]="owner.id">{{owner.name}}</option>
+  </select><br />
+  <button (click)="addCar()">Add Car</button>
+</div>
+<div style="border: 1px solid black;padding:10px;margin-top:10px">
+  <h2>Cars:</h2>
+  <ul>
+    <li *ngFor="let car of cars" style="margin-bottom:10px;padding-bottom:10px;border-bottom: solid 1px black;">
+      <div *ngIf="car">
+        <form (ngSubmit)="updateCar(car)">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="car.manufacture" name="manufacture" /><br />
+            <input type="text" [(ngModel)]="car.model" name="model" /><br />
+            <input type="text" [(ngModel)]="car.number" name="number" /><br />
+            <input type="text" [(ngModel)]="car.year" name="year" /><br />
+            <select [(ngModel)]="car.ownerId" name="owner">
+              <option [ngValue]="null" disabled selected = selected>Select Owner</option>
+              <option *ngFor="let owner of owners"  [ngValue]="owner.id">{{owner.name}}</option>
+            </select>
+            <input type="hidden" [(ngModel)]="car.id" name="id" /><br />
+            <button type="submit">Update Car</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

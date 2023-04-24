@@ -1,0 +1,49 @@
+<div style="border: 1px solid black;padding:10px;margin-bottom: 10px">
+  <h2>Add Service</h2>
+  <input type="text" placeholder="Enter Title" [(ngModel)]="name" /><br />
+  <input type="text" placeholder="Enter Title" [(ngModel)]="price" /><br />
+  <select [(ngModel)]="masterId" name="master">
+    <option [ngValue]="null" disabled selected = selected>Select Master</option>
+    <option *ngFor="let master of masters" [ngValue]="master.id">{{master.fullName}}</option>
+  </select><br />
+  <button (click)="addService()">Add Service</button>
+</div>
+<div style="border: 1px solid black;padding:10px">
+  <h2>Change Service Status</h2>
+  <form (ngSubmit)="changeStatus()" novalidate>
+    <select [(ngModel)]="serviceForCar" name="serviceForCar" style="float: left;margin-right: 10px">
+      <option [ngValue]="null" disabled selected = selected>Select Service</option>
+      <option *ngFor="let serviceForCar of serviceForCars" [ngValue]="serviceForCar">{{serviceForCar.name}}</option>
+    </select>
+    <select name="status" *ngIf="serviceForCar" [(ngModel)]="serviceForCar.status">
+      <option value="ACCEPTED">ACCEPTED</option>
+      <option value="PROCESS">PROCESS</option>
+      <option value="SUCCESS">SUCCESS</option>
+      <option value="NOT_SUCCESS">NOT_SUCCESS</option>
+      <option value="PAID">PAID</option>
+    </select><br />
+    <button type="submit">Change Status</button>
+  </form>
+</div>
+<div style="border: 1px solid black;padding:10px;margin-top:10px">
+  <h2>Services:</h2>
+  <ul>
+    <li *ngFor="let serviceForCar of serviceForCars" style="margin-bottom:10px;padding-bottom:10px;border-bottom: solid 1px black;">
+      <div *ngIf="serviceForCar">
+        <form (ngSubmit)="updateService(serviceForCar)">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="serviceForCar.name" name="name" /><br />
+            <input type="text" [(ngModel)]="serviceForCar.price" name="price" /><br />
+            <div>Status: {{serviceForCar.status}}</div>
+            <select [(ngModel)]="serviceForCar.masterId" name="masterId">
+              <option [ngValue]="null" disabled selected = selected>Select Master</option>
+              <option *ngFor="let master of masters"  [ngValue]="master.id">{{master.fullName}}</option>
+            </select>
+            <input type="hidden" [(ngModel)]="serviceForCar.id" name="id" /><br />
+            <button type="submit">Update Service</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

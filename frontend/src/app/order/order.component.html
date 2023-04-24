@@ -1,0 +1,84 @@
+<div style="border: 1px solid black;padding:10px">
+  <h2>Add Order</h2>
+  <table cellpadding="5">
+    <tr>
+      <th>Select&nbsp;Car:</th>
+      <td>
+        <select [(ngModel)]="car_id" name="car">
+          <option [ngValue]="null" disabled selected = selected>Select Car</option>
+          <option *ngFor="let car of cars" [ngValue]="car.id">{{car.model}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Problem&nbsp;Description:</th>
+      <td><input type="text" [(ngModel)]="problemDescription" /></td>
+    </tr>
+    <tr>
+      <th>Enter&nbsp;price:</th>
+      <td><input type="text" [(ngModel)]="price" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><button (click)="addOrder()">Add Order</button></td>
+    </tr>
+  </table>
+</div>
+<div style="padding:10px;margin-top:10px">
+  <h2>Orders:</h2>
+  <ul>
+    <li *ngFor="let order of orders" style="margin-bottom:10px;padding-bottom:10px;margin-right:10px;border: solid 1px black;float:left;list-style: none">
+      <div *ngIf="order">
+        <form (ngSubmit)="updateOrder(order)">
+          <div class="form-group">
+            <table cellpadding="5">
+              <tr>
+                <th>Order number:</th>
+                <td>№ {{order.id}}</td>
+              </tr>
+              <tr>
+                <th>Car:</th>
+                <td>
+                  <select [(ngModel)]="order.carId" name="car">
+                    <option [ngValue]="null" disabled>Select Car</option>
+                    <option *ngFor="let car of cars"  [ngValue]="car.id">{{car.model}}</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>Problem&nbsp;Description:</th>
+                <td><input type="text" [(ngModel)]="order.problemDescription" name="problemDescription" /></td>
+              </tr>
+              <tr>
+                <th>Start Date:</th>
+                <td>{{order.startDate}}</td>
+              </tr>
+              <!-- div *ngFor="let service-for-car of service-for-cars"  [ngValue]="service-for-car.id">{{service-for-car.name}}</div><br / -->
+              <tr>
+                <th>List&nbsp;of&nbsp;products:</th>
+                <td>
+                  <div class="item" *ngFor="let product of products">{{product.name}} - {{product.price}}<br></div>
+                  {{order.productsId}}
+                </td>
+              </tr>
+              <tr>
+                <th>Status:</th>
+                <td>{{order.status}}</td>
+              </tr>
+              <tr>
+                <th>Price:</th>
+                <td><input type="text" [(ngModel)]="order.price" name="price" /></td>
+              </tr>
+              <tr>
+                <th>Finish&nbsp;Date:</th>
+                <td>{{order.finishDate}}</td>
+              </tr>
+              <tr>
+                <td colspan="2"><button type="submit">Update Order</button></td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

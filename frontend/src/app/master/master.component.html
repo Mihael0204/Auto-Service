@@ -1,0 +1,27 @@
+<div style="border: 1px solid black;padding:10px">
+  <h2>Add Master</h2>
+  <input type="text" placeholder="Enter Name" [(ngModel)]="fullName" /><br />
+  <button (click)="addMaster()">Add Master</button>
+</div>
+<div style="border: 1px solid black;padding:10px;margin-top:10px">
+  <h2>Masters:</h2>
+  <ul>
+    <li *ngFor="let master of masters" style="margin-bottom:10px;padding-bottom:10px;border-bottom: solid 1px black;">
+      <div *ngIf="master">
+        <form (ngSubmit)="updateMaster(master)">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="master.fullName" name="fullName" /><br />
+            <input type="hidden" [(ngModel)]="master.readyOrdersId" name="readyOrdersId" />
+            <button type="submit" (click)="getOrders(master)">Show all orders</button>
+            <div *ngFor="let order of master.orders">
+              {{order.id}}
+            </div>
+            <button type="submit" (click)="getSalary(master)">Get Salary</button>
+            <div>{{master.salary}}</div>
+            <button type="submit">Update Master</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
